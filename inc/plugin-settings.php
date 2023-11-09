@@ -1,6 +1,6 @@
 <?php 
 function MS_plugin_register_settings() {
-	global $meta_fields_array;
+    echo "";
 }
 add_action( 'admin_init', 'MS_plugin_register_settings' );
 ?>

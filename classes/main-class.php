@@ -1,72 +1,71 @@
 <?php
-
-$meta_fields_array = array(
-	[
-		'field_name' => 'Position',
-		'field_type' => 'text',
-		'field_id' => 'memeber_position',
-		'desc' => 'Add your position on the Team.',
-		'placeholder' => 'Manager'
-	],
-	[
-		'field_name' => 'Email Address',
-		'field_type' => 'email',
-		'field_id' => 'email',
-		'desc' => 'Add your email address.',
-		'placeholder' => 'info@domain.com'
-	],
-	[
-		'field_name' => 'Phone Number',
-		'field_type' => 'tel',
-		'field_id' => 'phone',
-		'desc' => 'Add your Phone number.',
-		'placeholder' => '0123456789'
-	],
-	[
-		'field_name' => 'Mobile Number',
-		'field_type' => 'tel',
-		'field_id' => 'mobile',
-		'desc' => 'Add your Mobile number.',
-		'placeholder' => '0123456789'
-	],
-	[
-		'field_name' => 'Facebook',
-		'field_type' => 'url',
-		'field_id' => 'fb',
-		'desc' => 'Add your Facebook account URL link.',
-		'placeholder' => 'htps://www.Facebook.com'
-	],
-	[
-		'field_name' => 'Twitter',
-		'field_type' => 'url',
-		'field_id' => 'tw',
-		'desc' => 'Add your Twitter account URL link.',
-		'placeholder' => 'htps://www.Twitter.com'	
-	],
-	[
-		'field_name' => 'Instagram',
-		'field_type' => 'url',
-		'field_id' => 'in',
-		'desc' => 'Add your Instagram account URL link.',
-		'placeholder' => 'htps://www.Instagram.com'	
-	],
-	[
-		'field_name' => 'YouTube',
-		'field_type' => 'url',
-		'field_id' => 'yt',
-		'desc' => 'Add your YouTube account URL link.',
-		'placeholder' => 'htps://www.YouTube.com'
-	],
-	[
-		'field_name' => 'Pinterest',
-		'field_type' => 'url',
-		'field_id' => 'pint',
-		'desc' => 'Add your Pinterest account URL link.',
-		'placeholder' => 'htps://www.pinterest.com'	
-	],
-);
 class MS_TEAM_MEMBERS
 {
+	public $meta_fields_array = array(
+		[
+			'field_name' => 'Position',
+			'field_type' => 'text',
+			'field_id' => 'memeber_position',
+			'desc' => 'Add your position on the Team.',
+			'placeholder' => 'Manager'
+		],
+		[
+			'field_name' => 'Email Address',
+			'field_type' => 'email',
+			'field_id' => 'email',
+			'desc' => 'Add your email address.',
+			'placeholder' => 'info@domain.com'
+		],
+		[
+			'field_name' => 'Phone Number',
+			'field_type' => 'tel',
+			'field_id' => 'phone',
+			'desc' => 'Add your Phone number.',
+			'placeholder' => '0123456789'
+		],
+		[
+			'field_name' => 'Mobile Number',
+			'field_type' => 'tel',
+			'field_id' => 'mobile',
+			'desc' => 'Add your Mobile number.',
+			'placeholder' => '0123456789'
+		],
+		[
+			'field_name' => 'Facebook',
+			'field_type' => 'url',
+			'field_id' => 'fb',
+			'desc' => 'Add your Facebook account URL link.',
+			'placeholder' => 'htps://www.Facebook.com'
+		],
+		[
+			'field_name' => 'Twitter',
+			'field_type' => 'url',
+			'field_id' => 'tw',
+			'desc' => 'Add your Twitter account URL link.',
+			'placeholder' => 'htps://www.Twitter.com'	
+		],
+		[
+			'field_name' => 'Instagram',
+			'field_type' => 'url',
+			'field_id' => 'in',
+			'desc' => 'Add your Instagram account URL link.',
+			'placeholder' => 'htps://www.Instagram.com'	
+		],
+		[
+			'field_name' => 'YouTube',
+			'field_type' => 'url',
+			'field_id' => 'yt',
+			'desc' => 'Add your YouTube account URL link.',
+			'placeholder' => 'htps://www.YouTube.com'
+		],
+		[
+			'field_name' => 'Pinterest',
+			'field_type' => 'url',
+			'field_id' => 'pint',
+			'desc' => 'Add your Pinterest account URL link.',
+			'placeholder' => 'htps://www.pinterest.com'	
+		],
+	);
 	private $post_type_name  = "Team Member";
 	private $post_taxonomy_name  = "Profile Type";
 	private $post_type  = "team-member";
@@ -235,12 +234,11 @@ class MS_TEAM_MEMBERS
 	
 	public function MS_callback_function( $post )
 	{
-		global $meta_fields_array;
 		?>
 		<div class="main_meta_box_fields">
 			<table class="admin_table" style="width:100%">
 				<tbody>
-					<?php foreach( $meta_fields_array as $k => $vlaue ):
+					<?php foreach( $this->meta_fields_array as $k => $vlaue ):
 					get_post_meta( $post->ID, $vlaue['field_id'], true );?>
 					<tr>
 						<td style="width:22%;"><label for="<?php echo $vlaue['field_id'];?>" title="<?php echo $vlaue['desc'];?>"><?php echo $vlaue['field_name'];?></label></td>
@@ -255,8 +253,7 @@ class MS_TEAM_MEMBERS
 	
 	public function ms_teammember_register_meta_box_save( $post_id )
 	{
-		global $meta_fields_array;
-		foreach( $meta_fields_array as $k => $vlaue ){
+		foreach( $this->meta_fields_array as $k => $vlaue ){
 			$save_value = 'team_'.$vlaue['field_id'];
 			if ( isset( $_POST[ $save_value ] ) )
 				update_post_meta( $post_id, $save_value, $_POST[ $save_value ] );
