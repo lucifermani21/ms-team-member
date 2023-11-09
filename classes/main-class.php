@@ -85,7 +85,8 @@ class MS_TEAM_MEMBERS
 		add_action( 'init', array( $this, 'ms_register_custom_post_type' ) );
 		add_action( 'admin_menu', array( $this, 'ms_admin_menu_page') );
 		add_action( 'add_meta_boxes', array( $this, 'ms_teammember_register_meta_box' ) );
-        add_action( 'save_post', array( $this, 'ms_teammember_register_meta_box_save' ) ); 
+        add_action( 'save_post', array( $this, 'ms_teammember_register_meta_box_save' ) );
+		add_action( 'admin_init', array( $this, 'ms_plguin_setting_page_init' ) );
 		//add_shortcode( $this->shortcode, array( $this, 'shortcode_function' ) );
 	}
 	
@@ -182,44 +183,7 @@ class MS_TEAM_MEMBERS
         );    
         register_taxonomy( $this->taxonomy, $this->post_type, $args );
         flush_rewrite_rules();  
-    }
-
-	public function ms_admin_menu_page()
-	{
-		add_submenu_page(
-			'edit.php?post_type='.$this->post_type.'',
-			$this->setting_link, 
-			'Settings',
-			'manage_options', 
-			$this->setting_link, 
-				array( 
-					$this, 'MS_plugin_setting_page'
-				),
-			5
-		);
-		add_submenu_page(
-			'edit.php?post_type='.$this->post_type.'',
-			$this->shortcode_link,
-			'Shortcodes', 
-			'manage_options',
-			$this->shortcode_link, 
-				array( 
-					$this, 'MS_plugin_shortcode_page'
-				),
-			6
-		);
-	}
-
-	public function MS_plugin_setting_page()
-	{
-		require_once plugin_dir_path( __FILE__ ) . '../inc/plugin-settings.php';
-	}
-	
-	public function MS_plugin_shortcode_page()
-	{
-		require_once plugin_dir_path( __FILE__ ) . '../inc/plugin-shortcodes.php';
-	}
-	
+    }	
 	public function ms_teammember_register_meta_box()
 	{
 		add_meta_box( 
@@ -249,8 +213,7 @@ class MS_TEAM_MEMBERS
 			</table>
 		</div>
 		<?php 
-	}
-	
+	}	
 	public function ms_teammember_register_meta_box_save( $post_id )
 	{
 		foreach( $this->meta_fields_array as $k => $vlaue ){
@@ -259,5 +222,50 @@ class MS_TEAM_MEMBERS
 				update_post_meta( $post_id, $save_value, $_POST[ $save_value ] );
 		}
 	}
+		
+	public function ms_admin_menu_page()
+	{
+		add_submenu_page(
+			'edit.php?post_type='.$this->post_type.'',
+			$this->setting_link, 
+			'Settings',
+			'manage_options', 
+			$this->setting_link, 
+				array( 
+					$this, 'MS_plugin_setting_page'
+				),
+			5
+		);
+		add_submenu_page(
+			'edit.php?post_type='.$this->post_type.'',
+			$this->shortcode_link,
+			'Shortcodes', 
+			'manage_options',
+			$this->shortcode_link, 
+				array( 
+					$this, 'MS_plugin_shortcode_page'
+				),
+			6
+		);
+	}
+	public function MS_plugin_setting_page()
+	{
+		?>
+		<div class="wrap">
+			<h1><?php echo get_admin_page_title() ?></h1>
+			<form method="post" action="options.php">
+				<?php
+					settings_fields( 'rudr_slider_settings' ); // settings group name
+					do_settings_sections( 'rudr_slider' ); // just a page slug
+					submit_button(); // "Save Changes" button
+				?>
+			</form>
+		</div>
+		<?php 
+	}
 	
+	public function MS_plugin_shortcode_page()
+	{
+		require_once plugin_dir_path( __FILE__ ) . '../inc/plugin-shortcodes.php';
+	}
 }
