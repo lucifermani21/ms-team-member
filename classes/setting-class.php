@@ -15,6 +15,16 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 		
 	);	
 
+	/*
+	Bootstrap 5 enable
+	Heading font size
+	heading Color
+	Image enable disbale
+	Image heigth width
+	icons font size
+	icons color	
+	*/
+
     public function __construct()
     {        
 		// Empty...
