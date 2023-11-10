@@ -264,11 +264,7 @@ class MS_TEAM_MEMBERS
 		$team_in = get_field( 'team_in' );
 		$team_yt = get_field( 'team_yt' );
 		$team_pint = get_field( 'team_pint' );
-		$html .= '		
-		<div class="col-md-4">
-		<div class="card border-0 shadow-lg pt-5 my-5 position-relative">
-		<div class="card-body p-4">
-		<div class="member-profile position-absolute w-100 text-center">';		
+		$html .= '<div class="col-md-4"><div class="card border-0 shadow-lg pt-5 my-5 position-relative"><div class="card-body p-4"><div class="member-profile position-absolute w-100 text-center">';		
 		if( has_post_thumbnail() ):
 		$html .= '<img class="'.$img_class.'" src="'.$member_img.'" alt="'.$team_post_title.'">';
 		else:
@@ -278,50 +274,30 @@ class MS_TEAM_MEMBERS
 		if( !empty( $team_memeber_position ) ):
 		$html .= '<div class="mb-3 text-center">'.$team_memeber_position.'</div>';
 		endif;
-		$html .= '<div>'.$team_post_content.'</div>
-		</div>
-		</div>
+		$html .= '<div>'.$team_post_content.'</div></div></div>
 		<div class="card-footer theme-bg-primary border-0 text-center">';
 		if( ( !empty( $team_email ) ) || ( !empty( $team_mobile ) ) || ( !empty( $team_phone ) ) || ( !empty( $team_fb ) ) || ( !empty( $team_tw ) ) || ( !empty( $team_yt ) ) || ( !empty( $team_in ) ) || ( !empty( $team_pint ) ) ):
 		$html .= '<ul class="social-list list-inline mb-0 mx-auto">';
 		if( !empty( $team_email ) ):
-		$html .= '	<li class="list-inline-item">
-			<a class="text-dark" href="mailto:'.$team_email.'" target="_blank"><i class="fa-solid fa-envelope"></i></a>
-		</li>';
+		$html .= '	<li class="list-inline-item"><a class="text-dark" href="mailto:'.$team_email.'" target="_blank"><i class="fa-solid fa-envelope"></i></a></li>';
 		endif;if( !empty( $team_mobile ) ):
-		$html .= '	<li class="list-inline-item">
-			<a class="text-dark" href="tel:'.$team_mobile.'" target="_blank"><i class="fa-solid fa-mobile-screen"></i></a>
-		</li>';
+		$html .= '	<li class="list-inline-item"><a class="text-dark" href="tel:'.$team_mobile.'" target="_blank"><i class="fa-solid fa-mobile-screen"></i></a></li>';
 		endif;if( !empty( $team_phone ) ):
-		$html .= '<li class="list-inline-item">
-			<a class="text-dark" href="tel:'.$team_phone.'" target="_blank"><i class="fa-solid fa-phone"></i></a>
-		</li>';
+		$html .= '<li class="list-inline-item"><a class="text-dark" href="tel:'.$team_phone.'" target="_blank"><i class="fa-solid fa-phone"></i></a></li>';
 		endif;if( !empty( $team_fb ) ):
-		$html .= '<li class="list-inline-item">
-			<a class="text-dark" href="'.$team_fb.'" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
-		</li>';
+		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_fb.'" target="_blank"><i class="fa-brands fa-square-facebook"></i></a></li>';
 		endif;if( !empty( $team_tw ) ):
-		$html .= '<li class="list-inline-item">
-			<a class="text-dark" href="'.$team_tw.'" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
-		</li>';
+		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_tw.'" target="_blank"><i class="fa-brands fa-square-twitter"></i></a></li>';
 		endif;if( !empty( $team_yt ) ):
-		$html .= '<li class="list-inline-item">
-			<a class="text-dark" href="'.$team_yt.'" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-		</li>';
+		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_yt.'" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>';
 		endif;if( !empty( $team_in ) ):
-		$html .= '<li class="list-inline-item">
-			<a class="text-dark" href="'.$team_in.'" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
-		</li>';
+		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_in.'" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></li>';
 		endif;if( !empty( $team_pint ) ):
-		$html .= '<li class="list-inline-item">
-			<a class="text-dark" href="'.$team_pint.'" target="_blank"><i class="fa-brands fa-square-pinterest"></i></a>
-		</li>';
+		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_pint.'" target="_blank"><i class="fa-brands fa-square-pinterest"></i></a></li>';
 		endif;
 		$html .= '</ul>';
 		endif;
-		$html .= '</div>
-		</div>
-		</div>';
+		$html .= '</div></div></div>';
 		endwhile;
 		$html .= '</div></div>';
 		else:
