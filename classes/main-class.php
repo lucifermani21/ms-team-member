@@ -230,12 +230,14 @@ class MS_TEAM_MEMBERS
 	
 	public function MS_shortcode_function( $args )
 	{
+		//var_dump( $args );
 		$options = array( 'post_type' => $this->post_type, 'posts_per_page' => 9 );
+		$arr_cat = $args['profile'];
 		if(isset($args['profile']) && $args['profile'] != ""){
 			$options['tax_query'] = array(
 				array(
 					'taxonomy' => $this->taxonomy,
-					'terms' => $args['profile'],
+					'terms' => explode( ',', $arr_cat ),
 					'field' => 'slug',
 					'operator' => 'IN'
 				)
