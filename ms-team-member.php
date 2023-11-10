@@ -19,5 +19,6 @@ define( 'MS_TEAMM_SETTING_PLUGIN', __FILE__ );
 define( 'MS_TEAMM_SETTING_PLUGIN_BASENAME', plugin_basename( MS_TEAMM_SETTING_PLUGIN ) );
 
 include_once( 'classes/main-class.php' );
+include_once( 'classes/setting-class.php' );
 $obj = new MS_TEAM_MEMBERS;
 $obj->MS_hooks();
