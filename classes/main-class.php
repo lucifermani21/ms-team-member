@@ -230,7 +230,6 @@ class MS_TEAM_MEMBERS
 	
 	public function MS_shortcode_function( $args )
 	{
-		//var_dump( $args );
 		$options = array( 'post_type' => $this->post_type, 'posts_per_page' => 9 );
 		$arr_cat = isset( $args['profile'] ) ? $args['profile'] : '';
 		if(isset($args['profile']) && $args['profile'] != ""){
@@ -303,7 +302,7 @@ class MS_TEAM_MEMBERS
 		else:
 		$html .= '<p>Coming Soon...</p>';
 		endif;
-		$html .= '<div class="text-center">'.bootstrap_pagination($query, false).'</div>';
+		//$html .= '<div class="text-center">'.bootstrap_pagination($query, false).'</div>';
 		wp_reset_postdata();
 		return $html;
 	}
