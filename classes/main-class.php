@@ -232,7 +232,7 @@ class MS_TEAM_MEMBERS
 	{
 		//var_dump( $args );
 		$options = array( 'post_type' => $this->post_type, 'posts_per_page' => 9 );
-		$arr_cat = $args['profile'];
+		$arr_cat = isset( $args['profile'] ) ? $args['profile'] : '';
 		if(isset($args['profile']) && $args['profile'] != ""){
 			$options['tax_query'] = array(
 				array(
