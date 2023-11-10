@@ -246,69 +246,80 @@ class MS_TEAM_MEMBERS
 		$query = new WP_Query( $options );
 		if($query->have_posts()):
 		$html = '<div class="overflow-hidden"><div class="row justify-content-center">';
-		while ($query->have_posts()): $query->the_post();
+		while ($query->have_posts()): $query->the_post(); global $post;
+		//var_dump( $post );
 		$team_post_title = get_the_title();
-		$team_post_position = get_the_title();
 		$team_post_content = get_the_content();
 		$img_class = 'rounded-circle mx-auto d-inline-block shadow-sm';
 		$img_demo = MS_TEAMM_EDITING__URL.'inc/img/avatar.png';
-		$tema_post_img = get_the_post_thumbnail( 'full', [ 'class' => $img_class, 'alt' => $team_post_title ] );
+		$member_img = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
+		$team_memeber_position = get_field( 'team_memeber_position' );
+		$team_email = get_field( 'team_email' );
+		$team_phone = get_field( 'team_phone' );
+		$team_mobile = get_field( 'team_mobile' );
+		$team_fb = get_field( 'team_fb' );
+		$team_tw = get_field( 'team_tw' );
+		$team_in = get_field( 'team_in' );
+		$team_yt = get_field( 'team_yt' );
+		$team_pint = get_field( 'team_pint' );
 		$html .= '		
 		<div class="col-md-4">
 		<div class="card border-0 shadow-lg pt-5 my-5 position-relative">
 		<div class="card-body p-4">
 		<div class="member-profile position-absolute w-100 text-center">';		
 		if( has_post_thumbnail() ):
-			$tema_post_img;
+		$html .= '<img class="'.$img_class.'" src="'.$member_img.'" alt="'.$team_post_title.'">';
 		else:
 		$html .= '<img class="'.$img_class.'" src="'.$img_demo.'" alt="'.$team_post_title.'">';
 		endif;
+		$html .= '</div><div class="card-text pt-1"><h5 class="member-name mb-0 text-center text-primary font-weight-bold">'.$team_post_title.'</h5>';
+		if( !empty( $team_memeber_position ) ):
+		$html .= '<div class="mb-3 text-center">'.$team_memeber_position.'</div>';
+		endif;
+		$html .= '<div>'.$team_post_content.'</div>
+		</div>
+		</div>
+		<div class="card-footer theme-bg-primary border-0 text-center">';
+		if( ( !empty( $team_email ) ) || ( !empty( $team_mobile ) ) || ( !empty( $team_phone ) ) || ( !empty( $team_fb ) ) || ( !empty( $team_tw ) ) || ( !empty( $team_yt ) ) || ( !empty( $team_in ) ) || ( !empty( $team_pint ) ) ):
+		$html .= '<ul class="social-list list-inline mb-0 mx-auto">';
+		if( !empty( $team_email ) ):
+		$html .= '	<li class="list-inline-item">
+			<a class="text-dark" href="mailto:'.$team_email.'" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+		</li>';
+		endif;if( !empty( $team_mobile ) ):
+		$html .= '	<li class="list-inline-item">
+			<a class="text-dark" href="tel:'.$team_mobile.'" target="_blank"><i class="fa-solid fa-mobile-screen"></i></a>
+		</li>';
+		endif;if( !empty( $team_phone ) ):
+		$html .= '<li class="list-inline-item">
+			<a class="text-dark" href="tel:'.$team_phone.'" target="_blank"><i class="fa-solid fa-phone"></i></a>
+		</li>';
+		endif;if( !empty( $team_fb ) ):
+		$html .= '<li class="list-inline-item">
+			<a class="text-dark" href="'.$team_fb.'" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
+		</li>';
+		endif;if( !empty( $team_tw ) ):
+		$html .= '<li class="list-inline-item">
+			<a class="text-dark" href="'.$team_tw.'" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
+		</li>';
+		endif;if( !empty( $team_yt ) ):
+		$html .= '<li class="list-inline-item">
+			<a class="text-dark" href="'.$team_yt.'" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+		</li>';
+		endif;if( !empty( $team_in ) ):
+		$html .= '<li class="list-inline-item">
+			<a class="text-dark" href="'.$team_in.'" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
+		</li>';
+		endif;if( !empty( $team_pint ) ):
+		$html .= '<li class="list-inline-item">
+			<a class="text-dark" href="'.$team_pint.'" target="_blank"><i class="fa-brands fa-square-pinterest"></i></a>
+		</li>';
+		endif;
+		$html .= '</ul>';
+		endif;
 		$html .= '</div>
-		<div class="card-text pt-1">
-		<h5 class="member-name mb-0 text-center text-primary font-weight-bold">'.$team_post_title.'</h5>
-		<div class="mb-3 text-center">'.$team_post_position.'</div>
-		<div>'.$team_post_content.'</div>
 		</div>
-		</div>
-		<div class="card-footer theme-bg-primary border-0 text-center">
-		<ul class="social-list list-inline mb-0 mx-auto">
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-solid fa-envelope"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-solid fa-mobile-screen"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-solid fa-phone"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-brands fa-square-facebook"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-brands fa-square-instagram"></i></a>
-			</li>
-
-			<li class="list-inline-item">
-				<a class="text-dark" href="mailto:" target="_blank"><i class="fa-brands fa-square-pinterest"></i></a>
-			</li>
-		</ul>
-		</div>
-		</div>
-		</div>		
-		';
+		</div>';
 		endwhile;
 		$html .= '</div></div>';
 		else:
