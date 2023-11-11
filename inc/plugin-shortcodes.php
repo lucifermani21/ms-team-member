@@ -1,4 +1,4 @@
-<div class="wrap">
+<div id="MS_PLUGIN" class="wrap">
     <h1>Team Member Plugin Shortcodes</h1>
     <hr/>
 	<h3>This plugin is support Bootstrap 5 only.</h3>

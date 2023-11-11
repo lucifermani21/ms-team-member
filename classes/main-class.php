@@ -96,24 +96,22 @@ class MS_TEAM_MEMBERS
 		wp_register_style( 'plguin-app_css', $plugin_URL, array(), $version, 'all' );
 		wp_enqueue_style( 'plguin-app_css' );
 
-        /*$enable_woo_theme_bootstrap5 = get_option( 'woo_theme_bootstrap5' );
-        if( $enable_woo_theme_bootstrap5 == 'yes' ){
+        $enable_woo_theme_bootstrap5 = get_option( 'ms_bs5' );
+        if( $enable_woo_theme_bootstrap5 != '' ){
             $version = '5.3.2';
             wp_enqueue_script( 'MS_bootstrap_bundle', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$version.'/js/bootstrap.bundle.min.js', array(), $version, array( 'in_footer'  => true ) );	        
             wp_register_style( 'MS_bootstrap_css', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/'.$version.'/css/bootstrap.min.css', array(), $version, 'all' );
             wp_enqueue_style( 'MS_bootstrap_css' );
-        }*/
+        }
     }
 	
 	public function MS_admin_meta_fields_CSS()
 	{
-		echo "
-		<style type='text/css'>
-			.main_meta_box_fields table.admin_table,
-			.main_meta_box_fields th,
-			.main_meta_box_fields td{border: 1px solid #000000;border-collapse: collapse;}
+		echo "<style type='text/css'>
+			.main_meta_box_fields table.admin_table, .main_meta_box_fields th, .main_meta_box_fields td{border: 1px solid #000000;border-collapse: collapse;}
 			.main_meta_box_fields label {font-size: 0.9rem;font-weight:600;}
-			.main_meta_box_fields td{padding: 5px 10px 5px 10px;}
+			.main_meta_box_fields td {padding: 5px 10px 5px 10px;}
+			#MS_PLUGIN mark {background: bisque;}
 		</style>";
 	}
 	
