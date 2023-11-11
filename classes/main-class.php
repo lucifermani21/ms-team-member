@@ -230,8 +230,11 @@ class MS_TEAM_MEMBERS
 	
 	public function MS_shortcode_function( $args )
 	{
-		$options = array( 'post_type' => $this->post_type, 'posts_per_page' => 9 );
+		$post_show = isset($args['show']) ? $args['show'] :-1;
 		$arr_cat = isset( $args['profile'] ) ? $args['profile'] : '';
+		$post_order = isset( $args['order'] ) ? $args['order'] : 'DESC';
+		$post_orderby = isset( $args['orderby'] ) ? $args['orderby'] : 'date';
+		$options = array( 'post_type' => $this->post_type, 'posts_per_page' => $post_show , 'order' => $post_order, 'orderby' => $post_orderby );		
 		if(isset($args['profile']) && $args['profile'] != ""){
 			$options['tax_query'] = array(
 				array(
@@ -242,27 +245,26 @@ class MS_TEAM_MEMBERS
 				)
 			);
 		};
-		$html = '';	
-		$id = get_the_ID();
+		$html = '';
 		$query = new WP_Query( $options );
 		if($query->have_posts()):
 		$html = '<div class="overflow-hidden"><div class="row justify-content-center">';
 		while ($query->have_posts()): $query->the_post(); global $post;
-		//var_dump( $post );
+		$post_id = $post->ID;
 		$team_post_title = get_the_title();
 		$team_post_content = get_the_content();
 		$img_class = 'rounded-circle mx-auto d-inline-block shadow-sm';
 		$img_demo = MS_TEAMM_EDITING__URL.'inc/img/avatar.png';
 		$member_img = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
-		$team_memeber_position = get_field( 'team_memeber_position' );
-		$team_email = get_field( 'team_email' );
-		$team_phone = get_field( 'team_phone' );
-		$team_mobile = get_field( 'team_mobile' );
-		$team_fb = get_field( 'team_fb' );
-		$team_tw = get_field( 'team_tw' );
-		$team_in = get_field( 'team_in' );
-		$team_yt = get_field( 'team_yt' );
-		$team_pint = get_field( 'team_pint' );
+		$team_memeber_position = get_post_meta( $post_id, 'team_memeber_position', true );
+		$team_email = get_post_meta( $post_id, 'team_email', true );
+		$team_phone = get_post_meta( $post_id, 'team_phone', true );
+		$team_mobile = get_post_meta( $post_id, 'team_mobile', true );
+		$team_fb = get_post_meta( $post_id, 'team_fb', true );
+		$team_tw = get_post_meta( $post_id, 'team_tw', true );
+		$team_in = get_post_meta( $post_id, 'team_in', true );
+		$team_yt = get_post_meta( $post_id, 'team_yt', true );
+		$team_pint = get_post_meta( $post_id, 'team_pint', true );
 		$html .= '<div class="col-md-4"><div class="card border-0 shadow-lg pt-5 my-5 position-relative"><div class="card-body p-4"><div class="member-profile position-absolute w-100 text-center">';		
 		if( has_post_thumbnail() ):
 		$html .= '<img class="'.$img_class.'" src="'.$member_img.'" alt="'.$team_post_title.'">';
@@ -279,19 +281,26 @@ class MS_TEAM_MEMBERS
 		$html .= '<ul class="social-list list-inline mb-0 mx-auto">';
 		if( !empty( $team_email ) ):
 		$html .= '	<li class="list-inline-item"><a class="text-dark" href="mailto:'.$team_email.'" target="_blank"><i class="fa-solid fa-envelope"></i></a></li>';
-		endif;if( !empty( $team_mobile ) ):
+		endif;
+		if( !empty( $team_mobile ) ):
 		$html .= '	<li class="list-inline-item"><a class="text-dark" href="tel:'.$team_mobile.'" target="_blank"><i class="fa-solid fa-mobile-screen"></i></a></li>';
-		endif;if( !empty( $team_phone ) ):
+		endif;
+		if( !empty( $team_phone ) ):
 		$html .= '<li class="list-inline-item"><a class="text-dark" href="tel:'.$team_phone.'" target="_blank"><i class="fa-solid fa-phone"></i></a></li>';
-		endif;if( !empty( $team_fb ) ):
+		endif;
+		if( !empty( $team_fb ) ):
 		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_fb.'" target="_blank"><i class="fa-brands fa-square-facebook"></i></a></li>';
-		endif;if( !empty( $team_tw ) ):
+		endif;
+		if( !empty( $team_tw ) ):
 		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_tw.'" target="_blank"><i class="fa-brands fa-square-twitter"></i></a></li>';
-		endif;if( !empty( $team_yt ) ):
+		endif;
+		if( !empty( $team_yt ) ):
 		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_yt.'" target="_blank"><i class="fa-brands fa-youtube"></i></a></li>';
-		endif;if( !empty( $team_in ) ):
+		endif;
+		if( !empty( $team_in ) ):
 		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_in.'" target="_blank"><i class="fa-brands fa-square-instagram"></i></a></li>';
-		endif;if( !empty( $team_pint ) ):
+		endif;
+		if( !empty( $team_pint ) ):
 		$html .= '<li class="list-inline-item"><a class="text-dark" href="'.$team_pint.'" target="_blank"><i class="fa-brands fa-square-pinterest"></i></a></li>';
 		endif;
 		$html .= '</ul>';
