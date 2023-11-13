@@ -90,7 +90,7 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 		}
 		settings_errors( 'ms_error_messages' );
 		?>
-		<div class="wrap">
+		<div id="MS-plugin" class="wrap">
 			<h1><?php esc_html_e( 'Welcome to my custom admin page.', MS_TEAMM_SETTING_TEXT_DOMAIN ); ?></h1>
 			<strong>Please check the below custom CSS for setting related to the plugin. You can check description on hover the setting title.</strong>
 			<form method="POST" action="options.php">
@@ -103,10 +103,13 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 						<tr>
 							<th style="width:15%;padding-bottom: 10px;"><label for="<?php echo 'ms_'.$value['field_id'];?>" title="<?php echo $value['field_desc'];?>"><?php _e( $value['field_name'], MS_TEAMM_SETTING_TEXT_DOMAIN ); ?></label></th>
 							<td style="padding-bottom: 10px;">
-								<?php if( $value['field_type'] != 'checkbox' ):?>
-								<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>" value="<?php echo isset( $MS_option ) != '' ? $MS_option : '';?>" style="<?php echo $value['field_css']?>" />
+								<?php if( $value['field_type'] == 'checkbox' ):?>
+								<label class="switch">
+									<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>[]" value="yes" style="<?php echo $value['field_css']?>" <?php echo is_array( $MS_option ) ? 'checked' : '' ;?> />
+									<span class="slider round"></span>
+								</label>
 								<?php else:?>								
-								<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>[]" value="yes" style="<?php echo $value['field_css']?>" <?php echo is_array( $MS_option ) ? 'checked' : '' ;?> />
+									<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>" value="<?php echo isset( $MS_option ) != '' ? $MS_option : '';?>" style="<?php echo $value['field_css']?>" />
 								<?php endif;?>
 							</td>
 						</tr>
