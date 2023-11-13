@@ -108,6 +108,8 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 									<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>[]" value="yes" style="<?php echo $value['field_css']?>" <?php echo is_array( $MS_option ) ? 'checked' : '' ;?> />
 									<span class="slider round"></span>
 								</label>
+								<?php elseif( $value['field_type'] == 'number' ):?>						
+									<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>" value="<?php echo isset( $MS_option ) != '' ? $MS_option : '';?>" style="<?php echo $value['field_css']?>" min="10" max="100" />
 								<?php else:?>								
 									<input type="<?php echo $value['field_type'];?>" id="<?php echo 'ms_'.$value['field_id'];?>" name="<?php echo 'ms_'.$value['field_id'];?>" value="<?php echo isset( $MS_option ) != '' ? $MS_option : '';?>" style="<?php echo $value['field_css']?>" />
 								<?php endif;?>

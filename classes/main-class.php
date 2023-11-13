@@ -234,7 +234,7 @@ class MS_TEAM_MEMBERS
 	
 	public function MS_shortcode_function( $args )
 	{
-		$post_show = isset($args['show']) ? $args['show'] :-1;
+		$post_show = isset($args['show']) ? $args['show'] : -1;
 		$arr_cat = isset( $args['profile'] ) ? $args['profile'] : '';
 		$post_order = isset( $args['order'] ) ? $args['order'] : 'DESC';
 		$post_orderby = isset( $args['orderby'] ) ? $args['orderby'] : 'date';
