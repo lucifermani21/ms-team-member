@@ -119,8 +119,7 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 				<?php submit_button( 'Submit Settings' );?>
 			</form>
 		</div>
-		<?php 
-		//var_dump( get_option( 'ms_bs5' ) );
+		<?php
 	}
 }
 $obj = new MS_PLUGIN_SETTINGS;
