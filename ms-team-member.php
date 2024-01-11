@@ -3,7 +3,7 @@
 * Plugin Name: Team Members Profile
 * Plugin URI: https://github.com/lucifermani21/ms-team-member.git
 * Description: WordPress simple Team Members Profile plugin with Bootstrap 5 support, easy to use with help of shortcodes.
-* Version: 1.0.1
+* Version: 1.0.2
 * Author: Manpreet Singh
 **/
 
@@ -20,5 +20,3 @@ define( 'MS_TEAMM_SETTING_PLUGIN_BASENAME', plugin_basename( MS_TEAMM_SETTING_PL
 
 include_once( 'classes/main-class.php' );
 include_once( 'classes/setting-class.php' );
-$obj = new MS_TEAM_MEMBERS;
-$obj->MS_hooks();
