@@ -126,7 +126,3 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 		<?php
 	}
 }
-$obj = new MS_PLUGIN_SETTINGS;
-
-$obj->MS_hooks();
-$obj->ms_setting_hooks();
