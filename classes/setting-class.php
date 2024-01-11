@@ -50,11 +50,12 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
         add_action( 'admin_menu', array( $this, 'ms_admin_menu_page') );
 		add_action( 'admin_init', array( $this, 'ms_settings_init' ) );
     }
+	
     public function ms_admin_menu_page()
 	{
 		add_submenu_page(
 			'edit.php?post_type='.$this->post_type.'',
-			$this->setting_link, 
+			$this->setting_name, 
 			'Settings',
 			'manage_options', 
 			$this->setting_link, 
@@ -63,7 +64,7 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 		);
 		add_submenu_page(
 			'edit.php?post_type='.$this->post_type.'',
-			$this->shortcode_link,
+			$this->shortcode_name,
 			'Shortcodes', 
 			'manage_options',
 			$this->shortcode_link, 
@@ -83,6 +84,7 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 			register_setting( $this->setting_link, 'ms_'.$value['field_id'] );
 		endforeach;
 	}
+	
 	public function MS_plugin_setting_page()
 	{
 		if ( isset( $_GET['settings-updated'] ) ) {
@@ -97,7 +99,7 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 				<?php settings_fields( $this->setting_link );
 				do_settings_sections( $this->setting_link );?>
 				<table style="width: 100%;text-align: left;margin-top:2rem;">
-					<tboday>
+					<tbody>
 						<?php foreach( $this->setting_arr as $k => $value ):
 						$MS_option = get_option( 'ms_'.$value['field_id'] );?>
 						<tr>
@@ -116,7 +118,7 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 							</td>
 						</tr>
 						<?php endforeach;?>
-					</tboday>
+					</tbody>
 				</table>
 				<?php submit_button( 'Submit Settings' );?>
 			</form>
@@ -125,4 +127,6 @@ class MS_PLUGIN_SETTINGS extends MS_TEAM_MEMBERS
 	}
 }
 $obj = new MS_PLUGIN_SETTINGS;
+
+$obj->MS_hooks();
 $obj->ms_setting_hooks();
