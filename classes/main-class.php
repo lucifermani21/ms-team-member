@@ -72,7 +72,9 @@ class MS_TEAM_MEMBERS
 	public $taxonomy   = "member-category";
     public $shortcode  = "team_members";
 	public $tabsshortcode  = "team_membertabs";    
+    public $setting_name  = "Team Member Setting";
     public $setting_link  = "ms_team_mebers_setting";
+    public $shortcode_name  = "Team Member Shortcode";
     public $shortcode_link  = "ms_team_mebers_shortcode";
 	
 	public function __construct()	
@@ -80,7 +82,8 @@ class MS_TEAM_MEMBERS
 		     
 	}
 	
-	public function MS_hooks(){
+	public function MS_hooks()
+	{
 		add_action( 'admin_head', array( $this, 'MS_admin_meta_fields_CSS' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'MS_add_bootstrap5' ) );
 		add_action( 'init', array( $this, 'ms_register_custom_post_type' ) );
@@ -107,7 +110,7 @@ class MS_TEAM_MEMBERS
 		$ms_h_clr = get_option( 'ms_heading_clr', '#000000' );
 		$ms_icn_fs = get_option( 'ms_icons_fs', '16' );
 		$ms_icn_clr = get_option( 'ms_icons_clr', '#000000' );
-		var_dump($ms_h_clr);
+		//var_dump($ms_h_clr);
 		echo '<style type="text/css">
 		.member-name{color:'.$ms_h_clr.';font-size:'.$ms_h_fs.'px;}
 		.social-list a{color:'.$ms_icn_clr.';font-size:'.$ms_icn_fs.'px;}
